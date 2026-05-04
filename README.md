@@ -1,6 +1,6 @@
 # NUX Skills Repository
 
-![Skills](https://img.shields.io/badge/NUX-Skills-orange?style=for-the-badge&labelColor=black)
+![NUX Skills](https://img.shields.io/badge/NUX-Skills-orange?style=for-the-badge&labelColor=black)
 ![Scripts](https://img.shields.io/badge/scripts-183+-black?style=for-the-badge&labelColor=orange)
 ![Go](https://img.shields.io/badge/language-Go-orange?style=for-the-badge&labelColor=black)
 ![License](https://img.shields.io/badge/license-MIT-black?style=for-the-badge&labelColor=orange)
@@ -11,29 +11,29 @@
   <img src="https://img.shields.io/badge/NUX_Skills-Repository-orange?style=for-the-badge&labelColor=black">
 </p>
 
-<h1 align="center">🔧 Repositório de Scripts de Deploy para NUX CLI</h1>
+<h1 align="center">NUX Skills Repository</h1>
 
 <p align="center">
-  <b>Scripts Go para instalação automática de +120 ferramentas Linux</b><br/>
-  <i>Compatível com múltiplas distribuições</i>
+  <b>Go scripts for automatic installation of 120+ Linux tools</b><br/>
+  <i>Compatible with multiple Linux distributions</i>
 </p>
 
 ---
 
-## 📦 Sobre
+## About This Repository
 
-Este repositório contém todos os scripts `.go` de instalação para as **skills** da CLI **NUX**.
+This repository contains all `.go` installation scripts for the **NUX CLI** skills system.
 
-### ✨ O que você encontra aqui
+### Key Features
 
-- 🚀 **183 scripts Go** prontos para deploy
-- 🗂️ **Organização por categorias** (infrastructure, automation, ci-cd, etc.)
-- 🐧 **Multi-distribuição** (apt, yum, dnf, pacman)
-- 🔄 **Branches organizadas**: `main` (estável) e `dev` (desenvolvimento)
+- **183 Go scripts** ready for deployment
+- **Organized by categories** (infrastructure, automation, ci-cd, etc.)
+- **Multi-distribution support** (apt, yum, dnf, pacman)
+- **Organized branches**: `main` (stable) and `dev` (development)
 
 ---
 
-## 🗂️ Estrutura
+## Repository Structure
 
 ```
 skillnux/
@@ -49,33 +49,33 @@ skillnux/
 ├── databases/         # Redis, MySQL, PostgreSQL
 ├── cloud/             # AWS, Azure, GCloud
 ├── languages/         # Python, Go, Rust, Java
-├── tools/             # +50 ferramentas utilitárias
+├── tools/             # 50+ utility tools
 └── README.md
 ```
 
 ---
 
-## 🚀 Como Funciona
+## How It Works
 
-1. **Usuário executa** no NUX:
+1. **User executes** in NUX CLI:
    ```bash
    nux skill install ansible
    ```
 
-2. **NUX lê** o arquivo `skills/ansible.md` que contém:
+2. **NUX reads** the skill file `skills/ansible.md` which contains:
    ```markdown
    - **Repo:** https://github.com/rsdenck/skillnux/automation/ansible_pull.go
    ```
 
-3. **NUX faz download** do script `.go`
+3. **NUX downloads** the `.go` script from this repository
 
-4. **NUX executa** o script para instalar a ferramenta
+4. **NUX executes** the script to install the tool
 
 ---
 
-## 📋 Scripts Disponíveis
+## Available Scripts
 
-| Categoria | Scripts | Exemplo |
+| Category | Scripts | Example |
 |----------|---------|--------|
 | Infrastructure | 4 | `terraform_pull.go`, `pulumi_pull.go` |
 | Automation | 1 | `ansible_pull.go` |
@@ -89,9 +89,9 @@ skillnux/
 
 ---
 
-## 🛠️ Padrão dos Scripts
+## Script Standard
 
-Cada script `.go` segue o padrão:
+Each `.go` script follows this pattern:
 
 ```go
 package main
@@ -105,40 +105,47 @@ import (
 
 func main() {
     if runtime.GOOS != "linux" {
-        fmt.Println("Erro: Apenas Linux")
+        fmt.Println("Error: This script supports Linux only.")
         os.Exit(1)
     }
     
-    // Detecta package manager
-    if hasCommand("apt") { installApt() }
-    else if hasCommand("yum") { installYum() }
-    else if hasCommand("pacman") { installPacman() }
+    // Detect package manager
+    if hasCommand("apt") {
+        installApt()
+    } else if hasCommand("yum") || hasCommand("dnf") {
+        installYum()
+    } else if hasCommand("pacman") {
+        installPacman()
+    } else {
+        fmt.Println("Error: Unsupported package manager")
+        os.Exit(1)
+    }
     
-    fmt.Println("✅ Instalado com sucesso!")
+    fmt.Println("Success: Tool installed!")
 }
 ```
 
 ---
 
-## 🌿 Branches
+## Branches
 
-- `main` - Scripts estáveis e testados
-- `dev` - Novas skills em desenvolvimento
-
----
-
-## 🤝 Contribuindo
-
-1. Crie branch na `dev`: `git checkout -b dev-nova-skill`
-2. Adicione o script em `categoria/nova_skill_pull.go`
-3. Abra Pull Request para `dev`
-4. Após revisão, merge para `main`
+- `main` - Stable and tested scripts
+- `dev` - New skills in development
 
 ---
 
-## 📄 Licença
+## Contributing
 
-MIT License - veja [LICENSE](LICENSE)
+1. Create branch from `dev`: `git checkout -b dev-new-skill`
+2. Add the script in `category/new_skill_pull.go`
+3. Open Pull Request to `dev`
+4. After review, merge to `main`
+
+---
+
+## License
+
+MIT License - see [LICENSE](LICENSE)
 
 ---
 
